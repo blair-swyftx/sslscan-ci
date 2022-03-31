@@ -3,9 +3,12 @@ name: build-image-push-to-ghcr
 on:
   #schedule:
   #- cron: "13,43 * * * *"
-  
+  push:
   workflow_dispatch:
-  
+
+env:
+  IMAGE_NAME: sslscan-ci
+
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -19,14 +22,7 @@ jobs:
         uses: actions/checkout@v3
       - 
         name: Build image
-        run: docker build -t sslscan-ci-$TS .
-
-#     -
-#         name: Push image
-#         with:
-#           github-push-secret: ${{secrets.GITHUB_TOKEN}}
-#            with:
-#           docker-image-name: sslscan-ci
-#           docker-image-tag: $TS
-#           dockerfile-path: ./Dockerfile
-#           build-context: ./
+        run: docker build . -t $IMAGE_NAME --label $TS
+      -
+        name: Run to test
+        run: docker run --rm $IMAGE_NAME:$TS
