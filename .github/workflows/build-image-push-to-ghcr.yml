@@ -2,7 +2,7 @@ name: build-image-push-to-ghcr
 
 on:
   #schedule:
-  #- cron: "13,43 * * * *"
+  #- cron: "13 */4 * * *"
   push:
   workflow_dispatch:
 
@@ -22,5 +22,7 @@ jobs:
         uses: actions/checkout@v3
       - 
         name: Build image
-        run: docker build . -t $IMAGE_NAME:$TS && /
-             docker run --rm $IMAGE_NAME:$TS
+        run: docker build . -t $IMAGE_NAME:$TS
+      -
+        name: Run to test
+        run: docker run --rm $IMAGE_NAME:$TS
