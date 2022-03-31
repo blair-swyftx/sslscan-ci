@@ -22,4 +22,5 @@ jobs:
         uses: actions/checkout@v3
       - 
         name: Build image
-        run: docker build . -t $IMAGE_NAME --label $TS && docker run --rm $IMAGE_NAME:$TS
+        run: docker build . -t $IMAGE_NAME:$TS && /
+             docker run --rm $IMAGE_NAME:$TS
