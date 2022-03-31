@@ -9,15 +9,15 @@ on:
 jobs:
   build-job:
     runs-on: ubuntu-latest
-    env:
-      TS: $(date +%s)
     steps:       
  #     - name: Checkout repository
  #       uses: actions/checkout@v3
-      - name: runit
+      - name: timestamp
         shell: bash
+        run: echo "TS=$(date +%s)" >> $GITHUB_ENV
+      - name: print ts
         run: echo $TS
-        
+
 #       - name: Build and push latest image
 #         uses: ./
 #         with:
@@ -27,3 +27,4 @@ jobs:
 #           dockerfile-path: ./Dockerfile
 #           build-context: ./
     
+#echo "{environment_variable_name}={value}" >> $GITHUB_ENV
