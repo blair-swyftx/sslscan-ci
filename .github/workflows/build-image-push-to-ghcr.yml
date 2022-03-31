@@ -7,21 +7,26 @@ on:
   workflow_dispatch:
   
 jobs:
-  build-job:
+  run:
     runs-on: ubuntu-latest
     steps:       
-      - name: timestamp
+      - 
+        name: timestamp
         shell: bash
         run: echo "TS=$(date +%s)" >> $GITHUB_ENV
-        
-      - name: Checkout repository
+      - 
+        name: Checkout repository
         uses: actions/checkout@v3
-        
-      - name: Build and push latest image
-        uses: ./
-        with:
-          github-push-secret: ${{secrets.GITHUB_TOKEN}}
-          docker-image-name: sslscan-ci
-          docker-image-tag: $TS
-          dockerfile-path: ./Dockerfile
-          build-context: ./
+      - 
+        name: Build image
+        run: docker build -t sslscan-ci-$TS .
+
+#     -
+#         name: Push image
+#         with:
+#           github-push-secret: ${{secrets.GITHUB_TOKEN}}
+#            with:
+#           docker-image-name: sslscan-ci
+#           docker-image-tag: $TS
+#           dockerfile-path: ./Dockerfile
+#           build-context: ./
