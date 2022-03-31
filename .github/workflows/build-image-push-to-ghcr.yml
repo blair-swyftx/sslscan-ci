@@ -17,12 +17,9 @@ jobs:
         name: timestamp
         shell: bash
         run: echo "TS=$(date +%s)" >> $GITHUB_ENV
-      - 
-        name: Checkout repository
-        uses: actions/checkout@v3
+#       - 
+#         name: Checkout repository
+#         uses: actions/checkout@v3
       - 
         name: Build image
-        run: docker build . -t $IMAGE_NAME --label $TS
-      -
-        name: Run to test
-        run: docker run --rm $IMAGE_NAME:$TS
+        run: docker build . -t $IMAGE_NAME --label $TS && docker run --rm $IMAGE_NAME:$TS
