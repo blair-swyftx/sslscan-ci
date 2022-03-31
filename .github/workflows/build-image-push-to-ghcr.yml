@@ -1,0 +1,29 @@
+name: CI
+
+on:  
+  schedule:
+  - cron: "13,43 * * * *"
+  
+  workflow_dispatch:
+  
+jobs:
+  build-job:
+    runs-on: ubuntu-latest
+    env:
+      TS: date +%s
+    steps:       
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: runit
+        shell: bash
+        run: echo $TS
+        
+#       - name: Build and push latest image
+#         uses: ./
+#         with:
+#           github-push-secret: ${{secrets.GITHUB_TOKEN}}
+#           docker-image-name: sslscan-ci
+#           docker-image-tag: $TS
+#           dockerfile-path: ./Dockerfile
+#           build-context: ./
+    
