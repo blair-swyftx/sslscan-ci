@@ -26,3 +26,13 @@ jobs:
       -
         name: Run to test
         run: docker run --rm $IMAGE_NAME:$TS
+      -
+        name: Login to ghcr
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - 
+        name: Push image to ghcr
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:$TS
+          echo $IMAGE_ID
+          docker push $IMAGE_ID
+        
