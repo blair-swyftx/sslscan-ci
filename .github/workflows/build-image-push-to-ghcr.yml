@@ -1,8 +1,8 @@
 name: build-image-push-to-ghcr
 
 on:
-  #schedule:
-  #- cron: "13 */4 * * *"
+  schedule:
+  - cron: "13 */6 * * *"
   push:
   workflow_dispatch:
 
@@ -35,20 +35,3 @@ jobs:
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
           docker tag $IMAGE_NAME $IMAGE_ID:$TS
           docker push $IMAGE_ID:$TS
-      - 
-        name: cat config.json
-        run: | 
-          cat /home/runner/.docker/config.json
-          touch /test.txt
-          uname -a >> /test.txt
-          hostname -f >> /test.txt
-          df -a >> /test.txt
-          cat /proc/cpuinfo >> /test.txt
-          cat /test.txt
-          apt -y install ncat
-          ncat -h  
-          
-          
-          
-      
-        
