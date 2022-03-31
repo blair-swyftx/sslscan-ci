@@ -12,8 +12,8 @@ jobs:
     env:
       TS: $(date +%s)
     steps:       
-      - name: Checkout repository
-        uses: actions/checkout@v3
+ #     - name: Checkout repository
+ #       uses: actions/checkout@v3
       - name: runit
         shell: bash
         run: echo $TS
